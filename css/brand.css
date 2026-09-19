@@ -1,0 +1,80 @@
+/* ==========================================================================
+   GLOBAL BRAND TOKENS & IDENTITY
+   San Juan Academy - Core Design System (Bootstrap Compatible)
+   ========================================================================== */
+
+:root {
+  --bg-color: rgb(245 240 223);       /* Soft Sand */
+  --text-color: rgb(33 37 41);         /* Charcoal Black */
+  --primary-color: rgb(21 101 161);    /* Deep Sea Blue */
+  --primary-hover: rgb(16, 80, 128);   /* Darker Blue */
+  --nav-bg: rgb(113 186 236);          /* Light Clear Sky Blue */
+  --footer-bg: rgb(229 217 186);       /* Sandy Beach Beige */
+}
+
+/* ==========================================================================
+   BOOTSTRAP HIJACK OVERRIDES
+   ========================================================================== */
+
+/* 1. Body Reset */
+body {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* 2. Navbar Engine Force Fix 🎯 */
+nav.navbar {
+  background-color: var(--nav-bg) !important;
+}
+nav.navbar .navbar-brand,
+nav.navbar .nav-link,
+nav.navbar .navbar-text {
+  color: var(--text-color) !important;
+}
+nav.navbar .nav-link:hover {
+  color: var(--primary-color) !important;
+}
+
+/* 3. Solid Button Override */
+.btn-primary {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--bg-color) !important; 
+}
+.btn-primary:hover {
+  background-color: var(--primary-hover) !important;
+  border-color: var(--primary-hover) !important;
+}
+
+/* 4. Outline Button Override */
+.btn-outline-primary {
+  background-color: transparent !important;
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+.btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  color: rgb(255 255 255) !important;
+  border-color: var(--primary-color) !important;
+}
+
+/* 5. Footer Base Override */
+footer, .brand-footer {
+  background-color: var(--footer-bg) !important;
+  color: var(--text-color) !important;
+}
+footer a, .brand-footer a {
+  color: var(--text-color) !important;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   GLOBAL UTILITY COMPONENT ATOMS
+   ========================================================================== */
+.brand-card {
+  background-color: #ffffff !important;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
