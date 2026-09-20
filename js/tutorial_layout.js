@@ -70,6 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 4. Load the shared tutorial components
   loadComponent("header.html", "header-placeholder");
-  loadComponent("tutorial_footer.html", "tutorial_footer-placeholder");
+  loadComponent("tutorial_footer.html", "footer-placeholder");
 });
 
