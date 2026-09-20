@@ -9,10 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
   async function loadComponent(fileName, placeholderId) {
     const placeholder = document.getElementById(placeholderId);
     
-    // 🔥 THE FIX: Null Guard. If the placeholder element doesn't exist yet, 
-    // stop immediately instead of running .innerHTML and crashing the script!
     if (!placeholder) {
-      console.error(`[Layout Error] Could not find an HTML element with id="${placeholderId}". Make sure it exists in your HTML file.`);
+      console.error(
+        `[Layout Error] Could not find an HTML element with id="${placeholderId}".`
+      );
       return;
     }
 
@@ -25,24 +25,45 @@ document.addEventListener("DOMContentLoaded", () => {
       
       const htmlContent = await response.text();
       
-      // Inject the code safely now that we confirmed 'placeholder' is not null
+      // Inject the HTML component
       placeholder.innerHTML = htmlContent;
 
       // Reactivate any script tags found inside the injected HTML component
       placeholder.querySelectorAll("script").forEach((oldScript) => {
         const newScript = document.createElement("script");
-        Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-        newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+
+        Array.from(oldScript.attributes).forEach(attr => {
+          newScript.setAttribute(attr.name, attr.value);
+        });
+
+        newScript.appendChild(
+          document.createTextNode(oldScript.innerHTML)
+        );
+
         oldScript.parentNode.replaceChild(newScript, oldScript);
       });
 
     } catch (error) {
       console.error(`Error loading ${fileName}:`, error);
-      placeholder.innerHTML = `<p style="color: red; padding: 10px;">Error loading component (${fileName}).</p>`;
+      placeholder.innerHTML =
+        `<p style="color: red; padding: 10px;">
+          Error loading component (${fileName}).
+        </p>`;
     }
   }
 
-  // 3. Run the loaders
+  // 3. Load the shared CSS
+  const sharedStylesheet = document.createElement("link");
+  sharedStylesheet.rel = "stylesheet";
+  sharedStylesheet.href = `${baseUrl}shared.css`;
+
+  sharedStylesheet.onerror = () => {
+    console.error(`[Layout Error] Could not load shared.css`);
+  };
+
+  document.head.appendChild(sharedStylesheet);
+
+  // 4. Load the shared HTML components
   loadComponent("header.html", "header-placeholder");
   loadComponent("footer.html", "footer-placeholder");
 });
